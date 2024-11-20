@@ -25,7 +25,6 @@ public class ProductEntity {
     public Long getProductId() {
         return productId;
     }
-
     public String getProductImage() {
         return productImage;
     }

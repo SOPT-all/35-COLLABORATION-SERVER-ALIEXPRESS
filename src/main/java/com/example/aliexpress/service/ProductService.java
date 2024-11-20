@@ -1,26 +1,35 @@
 package com.example.aliexpress.service;
 
-import com.example.aliexpress.dto.Product;
+import com.example.aliexpress.dto.ProductInfo;
 import com.example.aliexpress.repository.ProductEntity;
 import com.example.aliexpress.repository.ProductRepository;
+import com.example.aliexpress.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 
 @Service
 public class ProductService {
+    private final ProductRepository productRepository;
+    private final ReviewRepository reviewRepository;
 
-    public final ProductRepository productRepository;
-
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, ReviewRepository reviewRepository) {
         this.productRepository = productRepository;
+        this.reviewRepository = reviewRepository;
     }
 
-    public Product getProductById(Long productId) {
+    public ProductInfo getProductById(Long productId) {
         ProductEntity productEntity = productRepository.findById(productId)
                 .orElseThrow(() -> new NoSuchElementException("Product not found"));
 
-        return new Product(
+        long reviewCount = reviewRepository.countByProduct_ProductId(productId);
+        Double averageRating = reviewRepository.findAverageRatingByProductId(productId);
+
+        if (averageRating == null) {
+            averageRating = 0.0;
+        }
+
+        return new ProductInfo(
                 productEntity.getProductId(),
                 productEntity.getProductImage(),
                 productEntity.getDetail(),
@@ -28,7 +37,9 @@ public class ProductService {
                 productEntity.getPercent(),
                 productEntity.getPriceDiscount(),
                 productEntity.isCoupon(),
-                productEntity.getCategory().getCategoryName()
-                );
+                productEntity.getCategory().getCategoryName(),
+                reviewCount,
+                averageRating
+        );
     }
 }
