@@ -1,5 +1,8 @@
 package com.example.aliexpress.service;
 
+import com.example.aliexpress.common.exception.BusinessException;
+import com.example.aliexpress.common.message.BusinessErrorMessage;
+import com.example.aliexpress.common.message.ProductErrorMessage;
 import com.example.aliexpress.dto.ProductInfo;
 import com.example.aliexpress.repository.ProductEntity;
 import com.example.aliexpress.repository.ProductRepository;
@@ -20,7 +23,7 @@ public class ProductService {
 
     public ProductInfo getProductById(Long productId) {
         ProductEntity productEntity = productRepository.findById(productId)
-                .orElseThrow(() -> new NoSuchElementException("Product not found"));
+                .orElseThrow(() -> new BusinessException(ProductErrorMessage.NOT_FOUND_ERROR));
 
         long reviewCount = reviewRepository.countByProduct_ProductId(productId);
         Double averageRating = reviewRepository.findAverageRatingByProductId(productId);
