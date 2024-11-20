@@ -24,4 +24,38 @@ public class ReviewEntity {
     private ProductEntity product;
 
     public ReviewEntity() {}
+
+    public Long getReviewId() {
+        return reviewId;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public int getRating() {
+        return rating;
+    }
+    public boolean isMonth() {
+        return isMonth;
+    }
+    public String getContentKorean() {
+        return contentKorean;
+    }
+    public String getContentOriginal() {
+        return contentOriginal;
+    }
+    public String getReviewImage() {
+        return reviewImage;
+    }
+    public int getUsefulCount() {
+        return usefulCount;
+    }
+    public int getRecommendCount() {
+        return recommendCount;
+    }
+    public int getLikeCount() {
+        return likeCount;
+    }
+    public ProductEntity getProduct() {
+        return product;
+    }
 }
