@@ -79,4 +79,9 @@ public class ProductService {
                 reviewEntity.getLikeCount()
         );
     }
+
+    public ProductEntity findByProductId(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new BusinessException(ProductErrorMessage.NOT_FOUND_ERROR));
+    }
 }
