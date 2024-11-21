@@ -2,10 +2,10 @@ package com.example.aliexpress.service;
 
 import com.example.aliexpress.common.exception.BusinessException;
 import com.example.aliexpress.common.message.ProductErrorMessage;
-import com.example.aliexpress.dto.Product;
-import com.example.aliexpress.dto.ProductList;
-import com.example.aliexpress.dto.Review;
-import com.example.aliexpress.dto.ReviewList;
+import com.example.aliexpress.dto.response.Product;
+import com.example.aliexpress.dto.response.ProductList;
+import com.example.aliexpress.dto.response.Review;
+import com.example.aliexpress.dto.response.ReviewList;
 import com.example.aliexpress.repository.ProductEntity;
 import com.example.aliexpress.repository.ProductRepository;
 import com.example.aliexpress.repository.ReviewEntity;
@@ -86,6 +86,7 @@ public class ProductService {
     public ProductEntity findByProductId(Long productId) {
         return productRepository.findById(productId)
                 .orElseThrow(() -> new BusinessException(ProductErrorMessage.NOT_FOUND_ERROR));
+    }
 
     // 연관 상품 조회
     public ProductList getRelatedProducts(Long productId) {

@@ -1,9 +1,9 @@
 package com.example.aliexpress.controller;
 
 import com.example.aliexpress.common.dto.ResponseDto;
-import com.example.aliexpress.dto.Product;
-import com.example.aliexpress.dto.ProductList;
-import com.example.aliexpress.dto.ReviewList;
+import com.example.aliexpress.dto.response.Product;
+import com.example.aliexpress.dto.response.ProductList;
+import com.example.aliexpress.dto.response.ReviewList;
 import com.example.aliexpress.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
