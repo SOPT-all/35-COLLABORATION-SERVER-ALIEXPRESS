@@ -82,6 +82,10 @@ public class ProductService {
                 reviewEntity.getLikeCount()
         );
     }
+  
+    public ProductEntity findByProductId(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new BusinessException(ProductErrorMessage.NOT_FOUND_ERROR));
 
     // 연관 상품 조회
     public ProductList getRelatedProducts(Long productId) {
@@ -122,4 +126,5 @@ public class ProductService {
                 averageRating
         );
     }
+  
 }
