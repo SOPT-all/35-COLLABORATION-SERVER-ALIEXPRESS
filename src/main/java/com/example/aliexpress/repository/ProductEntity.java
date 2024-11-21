@@ -16,7 +16,7 @@ public class ProductEntity {
     private int priceDiscount;
     private boolean isCoupon;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 
