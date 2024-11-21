@@ -1,12 +1,16 @@
 package com.example.aliexpress.service;
 
+import com.example.aliexpress.common.dto.ResponseDto;
 import com.example.aliexpress.common.exception.BusinessException;
 import com.example.aliexpress.common.message.OrderErrorMessage;
+import com.example.aliexpress.dto.response.OrderResponse;
 import com.example.aliexpress.repository.OrderEntity;
 import com.example.aliexpress.repository.OrderRepository;
 import com.example.aliexpress.repository.ProductEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -29,6 +33,12 @@ public class OrderService {
             OrderEntity orderEntity = new OrderEntity(productEntity);
             orderRepository.save(orderEntity);
         }
+    }
+
+    @Transactional(readOnly = true)
+    public OrderResponse getOrders() {
+        OrderEntity orderEntity = orderRepository.findAllWithProduct().stream().findFirst().get();
+        return OrderResponse.of(orderEntity);
     }
 
     private boolean checkExist(long productId) {
