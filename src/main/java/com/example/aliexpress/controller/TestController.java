@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
-
-
     @GetMapping("/test/default")
     public ResponseEntity<ResponseDto<Void>> testDefault() {
         throw new RuntimeException();

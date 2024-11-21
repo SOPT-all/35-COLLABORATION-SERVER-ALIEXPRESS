@@ -2,6 +2,7 @@ package com.example.aliexpress.controller;
 
 import com.example.aliexpress.common.dto.ResponseDto;
 import com.example.aliexpress.dto.Product;
+import com.example.aliexpress.dto.ReviewList;
 import com.example.aliexpress.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,5 +24,11 @@ public class ProductController {
     public ResponseEntity<ResponseDto<Product>> getProduct(@PathVariable Long productId) {
         Product product = productService.getProductById(productId);
         return ResponseEntity.status(HttpStatus.OK).body(ResponseDto.success(product));
+    }
+
+    @GetMapping("{productId}/reviews")
+    public ResponseEntity<ResponseDto<ReviewList>> getProductReviews(@PathVariable Long productId) {
+        ReviewList reviewList= productService.getProductReviews(productId);
+        return ResponseEntity.status(HttpStatus.OK).body(ResponseDto.success(reviewList));
     }
 }
