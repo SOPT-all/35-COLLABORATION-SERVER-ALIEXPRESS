@@ -1,4 +1,4 @@
-package com.example.aliexpress.dto;
+package com.example.aliexpress.dto.response;
 
 public record Review(
         long reviewId,
