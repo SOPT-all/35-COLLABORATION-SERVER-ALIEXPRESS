@@ -11,9 +11,9 @@ public class ProductEntity {
 
     private String productImage;
     private String detail;
-    private double priceOriginal;
+    private int priceOriginal;
     private int percent;
-    private double priceDiscount;
+    private int priceDiscount;
     private boolean isCoupon;
 
     @ManyToOne
@@ -31,13 +31,13 @@ public class ProductEntity {
     public String getDetail() {
         return detail;
     }
-    public double getPriceOriginal() {
+    public int getPriceOriginal() {
         return priceOriginal;
     }
     public int getPercent() {
         return percent;
     }
-    public double getPriceDiscount() {
+    public int getPriceDiscount() {
         return priceDiscount;
     }
     public boolean isCoupon() {
