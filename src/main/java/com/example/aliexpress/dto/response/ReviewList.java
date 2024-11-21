@@ -1,4 +1,4 @@
-package com.example.aliexpress.dto;
+package com.example.aliexpress.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

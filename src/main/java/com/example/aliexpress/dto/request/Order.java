@@ -1,4 +1,4 @@
-package com.example.aliexpress.dto;
+package com.example.aliexpress.dto.request;
 
 public record Order(
         long productId
