@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: [ubuntu-latest]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -40,13 +40,16 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: [ aws-ec2 ]
+    runs-on: ubuntu-latest
     steps:
-      - name: Pull Image from Docker Hub
-        run: sudo docker pull yh0872/sopt_collaboration:latest
+      - name: Install SSH Client
+        run: sudo apt-get update && sudo apt-get install -y openssh-client
 
-      - name: Delete old container
-        run: sudo docker rm -f sopt-collaboration-container || true
-
-      - name: Run Docker Container
-        run: sudo docker run -d -p 8080:8080 --name sopt-collaboration-container yh0872/sopt_collaboration
+      - name: SSH into EC2 and Pull Docker Image
+        run: |
+          ssh -o StrictHostKeyChecking=no -i "${{ secrets.EC2_SSH_KEY }}" ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+          sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          sudo docker pull yh0872/sopt_collaboration:latest
+          sudo docker rm -f sopt-collaboration-container || true
+          sudo docker run -d -p 8080:8080 --name sopt-collaboration-container yh0872/sopt_collaboration
+          EOF
