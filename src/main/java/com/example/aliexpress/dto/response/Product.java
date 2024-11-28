@@ -9,6 +9,6 @@ public record Product(
         int priceDiscount,
         boolean isCoupon,
         String categoryName,
-        double reviewCount,
+        long reviewCount,
         double rating) {
 }
